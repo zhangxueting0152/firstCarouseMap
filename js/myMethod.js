@@ -7,9 +7,27 @@ window.onload = function () {
         "http://localhost:63342/carouseMap2/images/5.jpg",
         "http://localhost:63342/carouseMap2/images/b.png"];
     //图片切换的时间间隔
-    var interval = 1000;
-    createImg(imgArr);
-    createButton(imgArr);
+    var interval;
+
+    //createMarquee(imgArr);
+    createMarquee(imgArr,3000);
+
+    //创建一个跑马灯方法
+    function createMarquee(imgArr, ...myInterval) {//myInterval为可选参数，表示图片切换的时间间隔
+        if (myInterval.length == 0) {
+            interval = 1000;//如果没有设置时间间隔，那就默认赋值1000
+        }else{
+            interval = myInterval[0];
+        }
+        createImg(imgArr);
+        createButton(imgArr);
+    }
+ /*   function createMarquee(imgArr,myInterval) {
+        interval = myInterval;
+        createImg(imgArr);
+        createButton(imgArr);
+    }*/
+
 
     var imgNum = imgArr.length;
     var container = document.getElementById("container");
