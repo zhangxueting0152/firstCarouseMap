@@ -1,4 +1,17 @@
 window.onload = function () {
+    //图片数组，存放着图片的地址
+    imgArr = ["http://localhost:63342/carouseMap2/images/1.jpg",
+        "http://localhost:63342/carouseMap2/images/2.jpg",
+        "http://localhost:63342/carouseMap2//images/3.jpg",
+        "http://localhost:63342/carouseMap2/images/4.jpg",
+        "http://localhost:63342/carouseMap2/images/5.jpg",
+        "http://localhost:63342/carouseMap2/images/b.png"];
+    //图片切换的时间间隔
+    var interval = 1000;
+    createImg(imgArr);
+    createButton(imgArr);
+
+    var imgNum = imgArr.length;
     var container = document.getElementById("container");
     var imgs = document.getElementById("imgs");
     //offset表示图片在切换时，需要相对于container偏移的位置
@@ -40,11 +53,11 @@ window.onload = function () {
         offset = parseInt(offset) + shift + 'px';
         //表示要展示第五张照片了
         if (parseInt(offset) > -300) {
-            offset = -1500 + 'px';
-            index = 4;
+            offset = -300*imgNum + 'px';
+            index = imgNum-1;
         }
         //表示要展示第一张照片了
-        else if (parseInt(offset) < -1500) {
+        else if (parseInt(offset) < -300*imgNum) {
             offset = -300 + 'px';
             index = 0;
         }
@@ -65,7 +78,7 @@ window.onload = function () {
     //开始自动播放
     function play() {
         //IntervalName = setInterval("next.click()",1000);//这种写法也可以
-        IntervalName = setInterval(function(){ next.click(); },1000);
+        IntervalName = setInterval(function(){ next.click(); },interval);
     }
 
     //点击圆圈按钮时，显示对应的图片
@@ -85,5 +98,47 @@ window.onload = function () {
     container.onmouseover = pause;
     //鼠标离开container容器时，需要开启自动轮播功能
     container.onmouseout = play;
+
+
+    function createImg(imgArr) {
+        //找到父节点
+        var imgs=document.getElementById("imgs");
+
+        //创建过渡img
+        var img = document.createElement("img");
+        img.src=imgArr[imgArr.length-1];
+        imgs.appendChild(img);
+
+        //开始创建真正需要用到的img
+        for (var i=0; i<imgArr.length; i++){
+            var img = document.createElement("img");
+            img.src=imgArr[i];
+            imgs.appendChild(img);
+        }
+
+        //创建过渡img
+        var img = document.createElement("img");
+        img.src=imgArr[0];
+        imgs.appendChild(img);
+    }
+
+    function createButton(imgArr) {
+        //找到添加的按钮的父节点
+        var buttonFa=document.getElementById("buttons");
+
+        //开始创建真正需要用到的img
+        for (var i=0; i<imgArr.length; i++){
+            var span = document.createElement("span");
+            span.index=i;
+
+            //如果是第0个节点，将class设为active
+            if (i===0){
+                span.style.backgroundColor='#000';
+                span.classList.add("active");
+                //span.className='active';//这种写法是错误的
+            }
+            buttonFa.appendChild(span);
+        }
+    }
 
 }

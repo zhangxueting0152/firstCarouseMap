@@ -56,38 +56,4 @@ a {
     top: 80px;
 }
 
-/*用css3做轮播图*/
-.box {
-    margin: 50px;
-    width: 300px;
-    height: 200px;
-    overflow: hidden;
-    position: relative;
-}
-.lists{
-    width: 1500px;
-    height: 200px;
-    position: absolute;
-    left: 0px;
-    animation-name: myMove;
-    animation-duration: 8s;
-    animation-iteration-count: infinite;
-}
-.lists img{
-    width: 300px;
-    height: 200px;
-    float: left;
-}
-@keyframes myMove {
-    0%,15%{
-        left: 0;}
-    20%,35%{
-        left: -300px;}
-    40%,55%{
-        left: -600px;}
-    60%,85%{
-        left: -900px;}
-    100%{
-        left: -1200px;}
-}
 
